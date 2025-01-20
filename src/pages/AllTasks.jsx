@@ -1,8 +1,11 @@
 import React from 'react'
+import Cards from '../components/Home/Cards'
 
 function AllTasks() {
   return (
-    <div>AllTasks</div>
+    <div>
+        <Cards/>
+    </div>
   )
 }
 
