@@ -38,7 +38,7 @@ function Cards({ home, InputDiv, setInput }) {
     <div className="grid grid-cols-4 gap-4 p-4">
       {data &&
         data.map((items, i) => (
-          <div className="bg-gray-700 rounded-sm p-4 flex flex-col justify-between">
+          <div key={i} className="bg-gray-700 rounded-sm p-4 flex flex-col justify-between">
             <div>
               <h3 className="text-xl font-semibold">{items.title}</h3>
               <p className="text-gray-300 my-2">{items.desc}</p>
