@@ -4,36 +4,19 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoAddCircle } from "react-icons/io5";
 
-function Cards({ home, InputDiv, setInput }) {
-  const data = [
-    {
-      title: "The  best coding channel",
-      desc: "desc 1",
-      status: "In Complete",
-    },
-    {
-      title: "The  best coding channel",
-      desc: "desc 2",
-      status: "Complete",
-    },
-    {
-      title: "The  best coding channel",
-      desc: "desc 3",
-      status: "In Complete",
-    },
-    {
-      title: "The  best coding channel",
-      desc: "desc 3",
-      status: "Complete",
-    },
-    {
-      title: "The  best coding channel",
-      desc: "desc 4",
-      status: "In Complete",
-    },
-  ];
+function Cards({ home, InputDiv, setInput, data }) {
+
+  
 
   const [ImportantButton, setImportantButton] = useState("Incomplete");
+
+  const handleCompleteTask = async() => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {data &&
@@ -44,12 +27,12 @@ function Cards({ home, InputDiv, setInput }) {
               <p className="text-gray-300 my-2">{items.desc}</p>
             </div>
             <div className="mt-4 w-full flex items-center">
-              <button
+              <button onClick={handleCompleteTask}
                 className={`${
-                  items.status == "In Complete" ? "bg-red-400" : "bg-green-700"
+                  items.complete == false ? "bg-red-400" : "bg-green-700"
                 } p-2 rounded w-3/6`}
               >
-                {items.status}
+                {items.complete === true ? "Completed":"In Completed"}
               </button>
               <div className="text-white  p-2 w-3/6 text-xl flex justify-around font-semibold">
                 <button>
