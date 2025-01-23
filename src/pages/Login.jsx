@@ -1,12 +1,21 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { authActions } from '../store/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
 
 
   const [data,setData] = useState({username:"",password:""});
   const history = useNavigate()
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  if(isLoggedIn === true){
+    history("/")
+  }
+
 
   const change = (e) =>{
     const {name,value} = e.target;
@@ -23,9 +32,12 @@ function Login() {
       else{
         const response = await axios.post("http://localhost:1000/user/login",data)
         console.log(response)
+        localStorage.setItem("id",response.data.id)
+        localStorage.setItem("token",response.data.token)
+        dispatch(authActions.login())
         setData({username:"",password:""})
         alert(response.data.message)
-        history("/")
+        history('/')
       }
     } catch (error) {
       console.log(error.response.data)
