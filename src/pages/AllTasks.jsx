@@ -37,7 +37,7 @@ function AllTasks() {
         </div>
         {data && <Cards home={"true"} setInput={setInput} setData={setData} data={data.tasks} fetchData={fetchData} />}
     </div>
-    <InputData InputDiv={InputDiv} setInput={setInput} />
+    <InputData InputDiv={InputDiv} setInput={setInput} fetchData={fetchData} />
     </>
   )
 }
