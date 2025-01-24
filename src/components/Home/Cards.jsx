@@ -3,18 +3,29 @@ import { CiHeart } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoAddCircle } from "react-icons/io5";
+import axios from "axios";
 
-function Cards({ home, InputDiv, setInput, data }) {
+function Cards({ home, setInput,setData, data,fetchData }) {
 
   
 
   const [ImportantButton, setImportantButton] = useState("Incomplete");
+  const headers = {
+    id: localStorage.getItem("id"),
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+  };
 
-  const handleCompleteTask = async() => {
+  const handleCompleteTask = async(id) => {
     try {
+      const res = await axios.put(`http://localhost:1000/task/updateCompleteTask/${id}`,{},{
+        headers
+      });
+
+      console.log(res,"complete")
+      fetchData()
       
     } catch (error) {
-      
+      console.log(error)
     }
   }
   return (
@@ -27,10 +38,11 @@ function Cards({ home, InputDiv, setInput, data }) {
               <p className="text-gray-300 my-2">{items.desc}</p>
             </div>
             <div className="mt-4 w-full flex items-center">
-              <button onClick={handleCompleteTask}
+              <button 
                 className={`${
                   items.complete == false ? "bg-red-400" : "bg-green-700"
                 } p-2 rounded w-3/6`}
+                onClick={() => handleCompleteTask(items._id)}
               >
                 {items.complete === true ? "Completed":"In Completed"}
               </button>

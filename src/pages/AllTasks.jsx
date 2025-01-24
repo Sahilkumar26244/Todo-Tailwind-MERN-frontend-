@@ -7,22 +7,23 @@ import axios from 'axios';
 function AllTasks() {
 
     const [InputDiv,setInput] = useState("hidden")
-    const [data,setData] = useState()
+    const [data,setData] = useState([])
 
     const headers = {
       id: localStorage.getItem("id"),
       authorization: `Bearer ${localStorage.getItem("token")}`,
     };
 
+    const fetchData = async() => {
+      const res = await axios.get("http://localhost:1000/task/get", {
+        headers,
+      });
+      console.log(res);
+      setData(res.data.data)
+    }
+
     useEffect(() => {
-      const fetch = async () => {
-        const res = await axios.get("http://localhost:1000/task/get", {
-          headers,
-        });
-        console.log(res);
-        setData(res.data.data)
-      };
-      fetch();
+      fetchData()
     }, [])
 
     // console.log(data.tasks)
@@ -34,7 +35,7 @@ function AllTasks() {
                 <IoAddCircle className='text-5xl text-gray-400 hover:text-gray-100 translation-all duration-300' />
             </button>
         </div>
-        {data && <Cards home={"true"} InputDiv={InputDiv} setInput={setInput} data={data.tasks} />}
+        {data && <Cards home={"true"} setInput={setInput} setData={setData} data={data.tasks} fetchData={fetchData} />}
     </div>
     <InputData InputDiv={InputDiv} setInput={setInput} />
     </>
