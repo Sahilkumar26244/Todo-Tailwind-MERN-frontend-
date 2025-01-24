@@ -8,6 +8,8 @@ function AllTasks() {
 
     const [InputDiv,setInput] = useState("hidden")
     const [data,setData] = useState([])
+    const [updateData,setUpdateData] = useState({id:"",title:"",desc:""}) 
+    console.log(updateData.title,"updatedData")
 
     const headers = {
       id: localStorage.getItem("id"),
@@ -35,9 +37,9 @@ function AllTasks() {
                 <IoAddCircle className='text-5xl text-gray-400 hover:text-gray-100 translation-all duration-300' />
             </button>
         </div>
-        {data && <Cards home={"true"} setInput={setInput} setData={setData} data={data.tasks} fetchData={fetchData} />}
+        {data && <Cards home={"true"} setInput={setInput} setData={setData} data={data.tasks} fetchData={fetchData} setUpdateData={setUpdateData} />}
     </div>
-    <InputData InputDiv={InputDiv} setInput={setInput} fetchData={fetchData} />
+    <InputData InputDiv={InputDiv} setInput={setInput} fetchData={fetchData} updateData={updateData} setUpdateData={setUpdateData} />
     </>
   )
 }

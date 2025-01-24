@@ -8,7 +8,7 @@ import { FaHeart } from "react-icons/fa";
 import { Bounce, Slide, toast } from 'react-toastify';
 
 
-function Cards({ home, setInput,setData, data,fetchData }) {
+function Cards({ home, setInput,setData, data,fetchData, setUpdateData }) {
   
 
   const [ImportantButton, setImportantButton] = useState("Incomplete");
@@ -104,6 +104,12 @@ function Cards({ home, setInput,setData, data,fetchData }) {
   }
 
 
+  const handleUpdate = (id,title,desc) => {
+    setInput("fixed")
+    setUpdateData({id:id,title:title,desc:desc})
+  }
+
+
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {data &&
@@ -127,7 +133,7 @@ function Cards({ home, setInput,setData, data,fetchData }) {
                   {items.important === false ? <CiHeart /> : <FaHeart className="text-red-500" />}
                   
                 </button>
-                <button>
+                <button onClick={() => handleUpdate(items._id,items.title,items.desc)}>
                   <FaEdit />
                 </button>
                 <button onClick={() => deleteTask(items._id)}>
