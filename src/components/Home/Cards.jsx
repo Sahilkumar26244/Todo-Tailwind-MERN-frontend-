@@ -4,9 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoAddCircle } from "react-icons/io5";
 import axios from "axios";
+import { FaHeart } from "react-icons/fa";
+
 
 function Cards({ home, setInput,setData, data,fetchData }) {
-
   
 
   const [ImportantButton, setImportantButton] = useState("Incomplete");
@@ -21,13 +22,44 @@ function Cards({ home, setInput,setData, data,fetchData }) {
         headers
       });
 
-      console.log(res,"complete")
+      // console.log(res,"complete")
       fetchData()
       
     } catch (error) {
       console.log(error)
     }
   }
+
+  const handleImportant = async(id) => {
+    console.log(headers)
+    try {
+      const res = await axios.put(`http://localhost:1000/task/updateImportantTask/${id}`,{},{
+        headers
+      });
+
+      // console.log(res,"important")
+      fetchData()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteTask = async(id) => {
+    try {
+      const res = await axios.delete(`http://localhost:1000/task/delete/${id}`,{
+        headers
+      });
+
+      console.log(res,"delete")
+      fetchData()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {data &&
@@ -47,13 +79,14 @@ function Cards({ home, setInput,setData, data,fetchData }) {
                 {items.complete === true ? "Completed":"In Completed"}
               </button>
               <div className="text-white  p-2 w-3/6 text-xl flex justify-around font-semibold">
-                <button>
-                  <CiHeart />
+                <button onClick={() => handleImportant(items._id)}>
+                  {items.important === false ? <CiHeart /> : <FaHeart className="text-red-500" />}
+                  
                 </button>
                 <button>
                   <FaEdit />
                 </button>
-                <button>
+                <button onClick={() => deleteTask(items._id)}>
                   <MdDelete />
                 </button>
               </div>
