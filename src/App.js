@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store/auth";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

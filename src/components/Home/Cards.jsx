@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { IoAddCircle } from "react-icons/io5";
 import axios from "axios";
 import { FaHeart } from "react-icons/fa";
+import { Bounce, Slide, toast } from 'react-toastify';
 
 
 function Cards({ home, setInput,setData, data,fetchData }) {
@@ -24,6 +25,17 @@ function Cards({ home, setInput,setData, data,fetchData }) {
 
       // console.log(res,"complete")
       fetchData()
+      toast.info(`🦄 ${res.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
       
     } catch (error) {
       console.log(error)
@@ -39,6 +51,27 @@ function Cards({ home, setInput,setData, data,fetchData }) {
 
       // console.log(res,"important")
       fetchData()
+      {res.data.task === false ? toast("Your Task is added to Important List!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        }) : toast("Your Task is remove from Important List!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+          });}
       
     } catch (error) {
       console.log(error)
@@ -53,6 +86,17 @@ function Cards({ home, setInput,setData, data,fetchData }) {
 
       console.log(res,"delete")
       fetchData()
+      toast.error(`🦄 ${res.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+        });
       
     } catch (error) {
       console.log(error)

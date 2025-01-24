@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { Bounce, Slide, toast } from 'react-toastify';
 
 function InputData({ InputDiv, setInput, fetchData }) {
   const [data, setData] = useState({ title: "", desc: "" });
@@ -15,21 +16,53 @@ function InputData({ InputDiv, setInput, fetchData }) {
     setData({ ...data, [name]: value });
   };
 
-  console.log(data);
+//   console.log(data);
 
   const submitData = async() => {
-    if(data.title === "" || data.desc === ""){
-        alert("All fields are required!")
-    }
-    else{
-        const res = await axios.post("http://localhost:1000/task",data,{
-            headers
-        })
-
-        console.log(res)
-        fetchData()
-        setData({title:"",desc:""})
-        setInput("hidden")
+    try {
+        if(data.title === "" || data.desc === ""){
+            alert("All fields are required!")
+        }
+        else{
+            const res = await axios.post("http://localhost:1000/task",data,{
+                headers
+            })
+    
+            console.log(res)
+            
+            fetchData()
+            setData({title:"",desc:""})
+            setInput("hidden")
+    
+    
+    
+    
+    
+            toast.success(`🦄 ${res.data.message}!`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+                });
+        }
+    } catch (error) {
+        console.log(error)
+        toast.error('This task is already created in your Lists!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Slide,
+            });
     }
   }
 
