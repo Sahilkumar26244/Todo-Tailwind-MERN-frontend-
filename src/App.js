@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import {
   Routes,
@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store/auth";
 import { ToastContainer } from 'react-toastify';
+import axios from "axios";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -28,11 +29,14 @@ function App() {
       navigate("/login");
     } 
   }, []);
+
+  
+
   return (
     <div className="bg-gray-900 text-white h-screen p-2 relative">
       <Routes>
         <Route exact path="/" element={<Home />}>
-          <Route index element={<AllTasks />} />
+          <Route index element={<AllTasks  />} />
           <Route path="/importantTasks" element={<ImportantTasks />} />
           <Route path="/completedTasks" element={<CompletedTasks />} />
           <Route path="/inCompletedTasks" element={<IncompletedTasks />} />

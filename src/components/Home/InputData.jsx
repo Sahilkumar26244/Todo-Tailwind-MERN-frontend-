@@ -71,6 +71,42 @@ function InputData({
     }
   };
 
+  const updateTask = async () => {
+    try {
+        if (data.title === "" || data.desc === "") {
+            alert("All fields are required!");
+          } else {
+            const res = await axios.put(`http://localhost:1000/task/update/${updateData.id}`, data, {
+              headers,
+            });
+    
+            console.log(res);
+    
+            fetchData();
+            setInput("hidden");
+            setUpdateData({
+                id:"",
+                title:"",
+                desc:""
+            })
+            setData({title:"",desc:""})
+            toast.info(`🦄 ${res.data.message}!`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                  });
+        }
+    } catch (error) {
+        console.log(error)
+    }
+  };
+
   return (
     <div>
       <div
@@ -84,7 +120,7 @@ function InputData({
             <button
               onClick={() => {
                 setInput("hidden");
-                setData({title:"",desc:""})
+                setData({ title: "", desc: "" });
                 setUpdateData({ id: "", title: "", desc: "" });
               }}
               className="text-2xl"
@@ -111,12 +147,21 @@ function InputData({
             value={data.desc}
             onChange={change}
           />
-          <button
-            className="px-3 py-2 bg-blue-400 rounded text-black text-xl font-semibold"
-            onClick={submitData}
-          >
-            Submit
-          </button>
+          {updateData.id === "" ? (
+            <button
+              className="px-3 py-2 bg-blue-400 rounded text-black text-xl font-semibold"
+              onClick={submitData}
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              className="px-3 py-2 bg-blue-400 rounded text-black text-xl font-semibold"
+              onClick={updateTask}
+            >
+              Update
+            </button>
+          )}
         </div>
       </div>
     </div>
