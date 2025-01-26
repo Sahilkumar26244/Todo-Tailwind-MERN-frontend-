@@ -134,7 +134,7 @@ function Cards({ home, setInput, setData, data, fetchData, setUpdateData }) {
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {data &&
-        data.map((items, i) => (
+        data?.map((items, i) => (
           <div
             key={i}
             className="bg-gray-700 rounded-sm p-4 flex flex-col justify-between"

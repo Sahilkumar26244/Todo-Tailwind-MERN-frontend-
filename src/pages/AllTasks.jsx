@@ -7,6 +7,7 @@ import axios from 'axios';
 function AllTasks() {
 
     const [InputDiv,setInput] = useState("hidden")
+    // console.log(data)
     const [data,setData] = useState([])
     const [updateData,setUpdateData] = useState({id:"",title:"",desc:""}) 
     console.log(updateData.title,"updatedData")
@@ -17,11 +18,16 @@ function AllTasks() {
     };
 
     const fetchData = async() => {
-      const res = await axios.get("http://localhost:1000/task/get", {
-        headers,
-      });
-      console.log(res);
-      setData(res.data.data)
+      try {
+        const res = await axios.get("http://localhost:1000/task/get", {
+          headers,
+        });
+        console.log(res);
+        setData(res.data.data)
+      } catch (error) {
+        console.log(error)
+        alert(error.response.data.error)
+      }
     }
 
     useEffect(() => {

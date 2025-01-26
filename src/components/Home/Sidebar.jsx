@@ -47,16 +47,22 @@ function Sidebar() {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
   };
+  
+  const fetchData = async() => {
+    try {
+        const res = await axios.get("http://localhost:1000/task/get", {
+            headers,
+          });
+        //   console.log(res.data.data);
+          setData(res.data.data)
+    } catch (error) {
+        console.log(error)
+        alert(error.response.data.error)
+    }
+  }
 
   useEffect(() => {
-    const fetch = async () => {
-      const res = await axios.get("http://localhost:1000/task/get", {
-        headers,
-      });
-    //   console.log(res.data.data);
-      setData(res.data.data)
-    };
-    fetch();
+    fetchData()
   }, []);
 
   
