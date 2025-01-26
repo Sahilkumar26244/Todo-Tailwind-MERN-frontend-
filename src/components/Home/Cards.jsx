@@ -28,7 +28,7 @@ function Cards({ home, setInput, setData, data, fetchData, setUpdateData }) {
 
       // console.log(res,"complete")
       fetchData();
-      {res.data.complete ? toast.success(`🦄 Completed!`, {
+      {res.data.complete ? toast.success(`🦄 InCompleted!`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -39,7 +39,7 @@ function Cards({ home, setInput, setData, data, fetchData, setUpdateData }) {
         theme: "dark",
         transition: Bounce,
       }) :
-      toast.info(`🦄 InCompleted!`, {
+      toast.info(`🦄 Completed!`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

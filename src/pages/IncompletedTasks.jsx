@@ -12,7 +12,7 @@ function IncompletedTasks() {
   };
 
   const fetchData = async() => {
-    const res = await axios.get("http://localhost:1000/task/getAllCompTasks", {
+    const res = await axios.get("http://localhost:1000/task/getAllIncompTasks", {
       headers,
     });
     // console.log(res);
@@ -26,7 +26,7 @@ function IncompletedTasks() {
   console.log(data)
   return (
     <div>
-        <Cards home={"false"} />
+        <Cards home={"false"} data={data} fetchData={fetchData} />
     </div>
   )
 }
