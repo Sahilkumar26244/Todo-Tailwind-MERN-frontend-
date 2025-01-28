@@ -29,7 +29,7 @@ function Signup() {
       }
       else{
         const response = await axios.post("http://localhost:1000/user",data)
-        console.log(response)
+        // console.log(response)
         setData({username:"",email:"",password:""})
         alert(response.data.message)
         history("/login")

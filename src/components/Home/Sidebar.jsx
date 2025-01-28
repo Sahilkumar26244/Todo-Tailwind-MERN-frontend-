@@ -7,9 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import axios from "axios";
+import { handleUnauthorized } from "../../utils/CentralizedLogutFunc";
 function Sidebar() {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const datas = [
     {
@@ -40,7 +41,7 @@ function Sidebar() {
     dispatch(authActions.logout());
     localStorage.clear("id");
     localStorage.clear("token");
-    history("/login");
+    navigate("/login");
   };
 
   const headers = {
@@ -57,7 +58,7 @@ function Sidebar() {
           setData(res.data.data)
     } catch (error) {
         console.log(error)
-        alert(error.response.data.error)
+        handleUnauthorized(error, dispatch, navigate);
     }
   }
 

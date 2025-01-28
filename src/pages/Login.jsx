@@ -22,7 +22,7 @@ function Login() {
     setData({...data,[name]:value})
   }
 
-  console.log(data)
+  // console.log(data)
 
   const submit = async() => {
     try {
@@ -31,7 +31,7 @@ function Login() {
       }
       else{
         const response = await axios.post("http://localhost:1000/user/login",data)
-        console.log(response)
+        // console.log(response)
         localStorage.setItem("id",response.data.id)
         localStorage.setItem("token",response.data.token)
         dispatch(authActions.login())

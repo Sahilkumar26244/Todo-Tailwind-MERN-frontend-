@@ -9,7 +9,7 @@ import { Bounce, Slide, toast } from "react-toastify";
 
 function Cards({ home, setInput, setData, data, fetchData, setUpdateData }) {
 
-  console.log(data)
+  // console.log(data)
   const [ImportantButton, setImportantButton] = useState("Incomplete");
   const headers = {
     id: localStorage.getItem("id"),
